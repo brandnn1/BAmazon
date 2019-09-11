@@ -53,3 +53,27 @@ connection.connect(function(err) {
         }
       });
   }
+
+  function viewProducts() {
+    console.log("Selecting all products...\n");
+    connection.query("SELECT * FROM products", function(err, res) {
+      if (err) throw err;
+      // Log all results of the SELECT statement
+      console.log(res);
+      connection.end();
+    });
+  }
+
+  function viewLowInventory() {
+    console.log("Selecting all products...\n");
+    connection.query("SELECT * FROM products where stock_quantity < 5", function(err, res) {
+      if (err) throw err;
+      // Log all results of the SELECT statement
+      console.log(res);
+      connection.end();
+    });
+  }
+
+  function addInventory() {
+      
+  }
