@@ -75,5 +75,132 @@ connection.connect(function(err) {
   }
 
   function addInventory() {
-      
+    // query the database for all items being auctioned
+    connection.query("SELECT * FROM products", function(err, results) {
+      if (err) throw err;
+      // once you have the items, prompt the user for which they'd like to bid on
+      inquirer
+        .prompt([
+          {
+            name: "item",
+            type: "rawlist",
+            choices: function() {
+              var choiceArray = [];
+              for (var i = 0; i < results.length; i++) {
+                choiceArray.push(results[i].product_name);
+              }
+              return choiceArray;
+            },
+            message: "What product would you like to add inventory to?"
+          },
+          {
+            name: "add",
+            type: "input",
+            message: "How many items would you like to add to the inventory?",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              }
+          }
+        ])
+        .then(function(answer) {
+          // get the information of the chosen item
+          var chosenItem;
+          for (var i = 0; i < results.length; i++) {
+            if (results[i].product_name === answer.item) {
+              chosenItem = results[i];
+              console.log(answer)
+              console.log(chosenItem)
+              Update()
+            }
+          }
+  
+          // determine if there are enough items
+          function Update(){
+            // bid was high enough, so update db, let the user know, and start over
+            connection.query(
+              "UPDATE products SET ? WHERE ?",
+              [
+                {
+                  stock_quantity: (chosenItem.stock_quantity + parseInt(answer.add))
+                },
+                {
+                  item_id: chosenItem.item_id
+                }
+              ],
+              function(error) {
+                if (error) throw err;
+                console.log("You have successfully added " + answer.add + " units!");
+                console.log("There are currently " + (chosenItem.stock_quantity + answer.add) + " units remaining" );
+                connection.end();
+              }
+            );
+          }
+        });
+    });
   }
+
+  function addNewProduct() {
+      inquirer
+        .prompt([
+          {
+            name: "productName",
+            type: "input",
+            message: "What is the name of the product you'd like to add?"
+          },
+          {
+            name: "deptName",
+            type: "input",
+            message: "What department does this product belong in?",
+            validate: function(value) {
+                if (isNaN(value) === true) {
+                  return true;
+                }
+                return false;
+              }
+          },
+          {
+            name: "price",
+            type: "input",
+            message: "What price would you like to set?",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              }
+          },
+          {
+            name: "stockQuant",
+            type: "input",
+            message: "How many units do you want to set for this product?",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              }
+          }
+        ])
+        .then(function(answer) {
+            // bid was high enough, so update db, let the user know, and start over
+            connection.query(
+              "INSERT INTO products  SET ?",
+              [
+                {
+                  product_name: answer.productName,
+                  department_name: answer.deptName,
+                  price: answer.price,
+                  stock_quantity: answer.stockQuant
+                }
+              ],
+              function(error) {
+                if (error) throw err;
+                console.log("You have successfully added " + answer.productName + " to the database!");
+                connection.end();
+              }
+            );
+          }
+        )};
