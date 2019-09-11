@@ -59,7 +59,7 @@ connection.connect(function(err) {
     connection.query("SELECT * FROM products", function(err, res) {
       if (err) throw err;
       // Log all results of the SELECT statement
-      console.log(res);
+      console.table(res);
       connection.end();
     });
   }
@@ -69,7 +69,7 @@ connection.connect(function(err) {
     connection.query("SELECT * FROM products where stock_quantity < 5", function(err, res) {
       if (err) throw err;
       // Log all results of the SELECT statement
-      console.log(res);
+      console.table(res);
       connection.end();
     });
   }
@@ -111,8 +111,7 @@ connection.connect(function(err) {
           for (var i = 0; i < results.length; i++) {
             if (results[i].product_name === answer.item) {
               chosenItem = results[i];
-              console.log(answer)
-              console.log(chosenItem)
+              console.table(chosenItem)
               Update()
             }
           }
@@ -154,6 +153,7 @@ connection.connect(function(err) {
             name: "deptName",
             type: "input",
             message: "What department does this product belong in?",
+            choices: ["Literature", "Cooking", "Sports","Music", "Other"],
             validate: function(value) {
                 if (isNaN(value) === true) {
                   return true;

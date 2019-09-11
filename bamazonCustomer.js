@@ -56,8 +56,7 @@ connection.connect(function(err) {
           for (var i = 0; i < results.length; i++) {
             if (results[i].product_name === answer.item) {
               chosenItem = results[i];
-              console.log(answer)
-              console.log(chosenItem)
+              console.table(chosenItem)
             }
           }
   
@@ -68,7 +67,8 @@ connection.connect(function(err) {
               "UPDATE products SET ? WHERE ?",
               [
                 {
-                  stock_quantity: (chosenItem.stock_quantity - answer.buy)
+                  stock_quantity: (chosenItem.stock_quantity - answer.buy),
+                  product_sales: (chosenItem.product_sales + (chosenItem.price * answer.buy))
                 },
                 {
                   item_id: chosenItem.item_id
