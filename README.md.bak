@@ -43,7 +43,7 @@ The Manager View gets a bit more complex. This view has the ability to do the fo
  Adding new inventory to existing products
  
  ![Manager Add Inventory Capture](/images/ManagerAddInventory1.PNG)
- ![Manager Add Inventory Capture](/images/ManagerAddInventory1.PNG)
+ ![Manager Add Inventory Capture](/images/ManagerAddInventory2.PNG)
  Note:  A message is provided after adding inventory detailing the new stock quantity of the item inventory was added for. 
  
  Adding new products available for sale
