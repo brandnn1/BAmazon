@@ -9,6 +9,7 @@ CREATE TABLE products(
   department_name VARCHAR(45) NOT NULL,
   price INT default 0,
   stock_quantity INT default 0,
+  units_sold INT default 0,
   product_sales INT default 0
 );
 
@@ -201,15 +202,6 @@ INSERT INTO departments (
   over_head_costs
 )
 values(
-    'Literature',
-    "2500"
-);
-
-INSERT INTO departments (
-  department_name,
-  over_head_costs
-)
-values(
     'Cooking',
     "1500"
 );
@@ -239,6 +231,5 @@ values(
     'Other',
     "5000"
 );
-
 
 

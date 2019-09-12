@@ -68,7 +68,8 @@ connection.connect(function(err) {
               [
                 {
                   stock_quantity: (chosenItem.stock_quantity - answer.buy),
-                  product_sales: (chosenItem.product_sales + (chosenItem.price * answer.buy))
+                  product_sales: (chosenItem.product_sales + (chosenItem.price * answer.buy)),
+                  units_sold: (chosenItem.units_sold + parseInt(answer.buy))
                 },
                 {
                   item_id: chosenItem.item_id
@@ -77,7 +78,7 @@ connection.connect(function(err) {
               function(error) {
                 if (error) throw err;
                 console.log("You have successfully purchased " + answer.buy + " units!");
-                console.log("There are currently" + (chosenItem.stock_quantity - answer.buy) + "units remaining" );
+                console.log("There are currently " + (chosenItem.stock_quantity - answer.buy) + " units remaining" );
                 showItems();
               }
             );

@@ -132,7 +132,7 @@ connection.connect(function(err) {
               function(error) {
                 if (error) throw err;
                 console.log("You have successfully added " + answer.add + " units!");
-                console.log("There are currently " + (chosenItem.stock_quantity + answer.add) + " units remaining" );
+                console.log("There are currently " + (chosenItem.stock_quantity + parseInt(answer.add)) + " units remaining" );
                 connection.end();
               }
             );
@@ -142,6 +142,8 @@ connection.connect(function(err) {
   }
 
   function addNewProduct() {
+    connection.query("SELECT distinct department_name FROM departments where department_name IS NOT NULL", function(err, results) {
+        if (err) throw err;
       inquirer
         .prompt([
           {
@@ -151,14 +153,14 @@ connection.connect(function(err) {
           },
           {
             name: "deptName",
-            type: "input",
+            type: "rawlist",
             message: "What department does this product belong in?",
-            choices: ["Literature", "Cooking", "Sports","Music", "Other"],
-            validate: function(value) {
-                if (isNaN(value) === true) {
-                  return true;
+            choices: function() {
+                var choiceArray = [];
+                for (var i = 0; i < results.length; i++) {
+                  choiceArray.push(results[i].department_name);
                 }
-                return false;
+                return choiceArray;
               }
           },
           {
@@ -203,4 +205,5 @@ connection.connect(function(err) {
               }
             );
           }
-        )};
+        )}
+    )};
