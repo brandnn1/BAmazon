@@ -49,7 +49,7 @@ function startPrompt() {
 
 function viewDeptSales() {
     console.log("Selecting all departments...\n");
-    connection.query("select distinct d.department_id as 'Department ID',d.department_name as 'Department Name', sum(p.stock_quantity) as 'Stock Quantity', d.over_head_costs as 'Overhead Cost', sum(p.units_sold) as 'Total Units Sold',sum(p.product_sales) as 'Total Product Sales', (sum(p.product_sales) - d.over_head_costs) as 'Total Profit'from bamazon.departments d join bamazon.products p on trim(p.department_name) = trim(d.department_name) group by p.department_name;"
+    connection.query("select distinct d.department_id as 'Department ID',d.department_name as 'Department Name', sum(p.stock_quantity) as 'Stock Quantity', d.over_head_costs as 'Overhead Cost', sum(p.units_sold) as 'Total Units Sold',sum(p.product_sales) as 'Total Product Sales', (sum(p.product_sales) - d.over_head_costs) as 'Total Profit'from bamazon.departments d left join bamazon.products p on p.department_name = d.department_name group by p.department_name;"
         , function (err, res) {
             if (err) throw err;
             // Log all results of the SELECT statement

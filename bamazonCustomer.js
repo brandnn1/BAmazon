@@ -79,14 +79,14 @@ connection.connect(function(err) {
                 if (error) throw err;
                 console.log("You have successfully purchased " + answer.buy + " units!");
                 console.log("There are currently " + (chosenItem.stock_quantity - answer.buy) + " units remaining" );
-                showItems();
+                connection.end();
               }
             );
           }
           else {
             // bid wasn't high enough, so apologize and start over
             console.log("Insufficient quantity!");
-            showItems();
+            connection.end();
           }
         });
     });

@@ -66,7 +66,7 @@ connection.connect(function(err) {
 
   function viewLowInventory() {
     console.log("Selecting all products...\n");
-    connection.query("SELECT * FROM products where stock_quantity < 5", function(err, res) {
+    connection.query("SELECT * FROM products where stock_quantity <= 5", function(err, res) {
       if (err) throw err;
       // Log all results of the SELECT statement
       console.table(res);
