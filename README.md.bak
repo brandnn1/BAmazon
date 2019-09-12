@@ -26,31 +26,50 @@ Otherwise it provides a message that there is insufficient stock
 
 After purchase is complete, the inventory is modified to accurately reflect the remaining stock available, and a column is updated which tallies how many units have been sold. 
 
+
 #### -Manager View-
 
 node bamazonManager.js
 
 The Manager View gets a bit more complex. This view has the ability to do the following:
  View overall products for sale
+
+![Manager View Capture](/Images/ManagerViewProducts.PNG)
  
  Viewing only items that are low in inventory
  
+ ![Manager View Low Inventory Capture](/Images/ManagerViewLowProducts.PNG)
+ 
  Adding new inventory to existing products
  
+ ![Manager Add Inventory Capture](/Images/ManagerAddInventory1.PNG)
+ ![Manager Add Inventory Capture](/Images/ManagerAddInventory1.PNG)
+ Note:  A message is provided after adding inventory detailing the new stock quantity of the item inventory was added for. 
+ 
  Adding new products available for sale
+ 
+ ![Manager Add New Product Capture](/Images/ManagerAddProducts1.PNG)
+ ![Manager Add New Product Capture](/Images/ManagerAddProducts2.PNG)
+ Note - When adding a new product - A Manager will only be able to select a department that exists in the departments table. If the value doesn't exist
+ 				in the departments table it will not be an option. In these cases, a supervisor would need to go in and add the department.
 
-![GitHub Logo](/Images/SpotifyCapture.PNG)
 
-#### -OMDB- 
+#### -Supervisor View- 
 
-node liri.js movie-thcallis <movie name>
+node bamazonSupervisor.js
 
-![GitHub Logo](/Images/MovieCapture.PNG)
+Supervisors are allowed to view their overall product sales by Department or they can add a new department.
+![Supervisor Select Capture](/Images/SupervisorSelect.PNG)
 
-#### -Custom-
-Additionally this application supports making API calls directly from a text file. The first input in the file will be the api you want to call (in it's above naming convention) and the second input will be your search parameters. Currently the file is configured to make a spotify call
+If they view their overall product sales they will see statistics at the department level. Total profit is a field that is calculated on the fly and looks at the overhead cost vs. the total product sales.
+![Supervisor Select Capture](/Images/SupervisorView.PNG)
 
-node liri.js random-call
+When they add a new department to the table they indicate the name and how much overhead there is going to be. After that a check is done to determine if the 
+department already exists in the table. If it doesn't - it is added. 
+![Supervisor Select Capture](/Images/SupervisorDeptCheckSuccess.PNG)
+Looking at the overall product sales, you can now see the new department listed. Because there are no products available to customers yet however, there are null columns present. 
+![Supervisor Select Capture](/Images/SupervisorDeptCheckSuccess2.PNG)
 
-![GitHub Logo](/Images/SimonSaysCapture.PNG)
-![GitHub Logo](/Images/ExtraSimonSays.PNG)
+If the department does exist - the supervisor will receive a message indicating such. 
+![Supervisor Select Capture](/Images/SupervisorDeptCheckSuccessFail.PNG)
+
