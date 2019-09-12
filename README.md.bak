@@ -44,12 +44,14 @@ The Manager View gets a bit more complex. This view has the ability to do the fo
  
  ![Manager Add Inventory Capture](/images/ManagerAddInventory1.PNG)
  ![Manager Add Inventory Capture](/images/ManagerAddInventory2.PNG)
+ 
  Note:  A message is provided after adding inventory detailing the new stock quantity of the item inventory was added for. 
  
  Adding new products available for sale
  
  ![Manager Add New Product Capture](/images/ManagerAddProducts1.PNG)
  ![Manager Add New Product Capture](/images/ManagerAddProducts2.PNG)
+ 
  Note - When adding a new product - A Manager will only be able to select a department that exists in the departments table. If the value doesn't exist
  				in the departments table it will not be an option. In these cases, a supervisor would need to go in and add the department.
 

@@ -69,9 +69,10 @@ If they view their overall product sales they will see statistics at the departm
 When they add a new department to the table they indicate the name and how much overhead there is going to be. After that a check is done to determine if the 
 department already exists in the table. If it doesn't - it is added. 
 ![Supervisor Select Capture](/images/SupervisorDeptCheckSuccess.PNG)
+
 Looking at the overall product sales, you can now see the new department listed. Because there are no products available to customers yet however, there are null columns present. 
 ![Supervisor Select Capture](/images/SupervisorDeptCheckSuccess2.PNG)
 
 If the department does exist - the supervisor will receive a message indicating such. 
-![Supervisor Select Capture](/images/SupervisorDeptCheckSuccessFail.PNG)
+![Supervisor Select Capture](/images/SupervisorDeptCheckFail.PNG)
 
