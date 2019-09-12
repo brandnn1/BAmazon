@@ -83,7 +83,7 @@ connection.connect(function(err) {
         .prompt([
           {
             name: "item",
-            type: "rawlist",
+            type: "list",
             choices: function() {
               var choiceArray = [];
               for (var i = 0; i < results.length; i++) {
@@ -153,7 +153,7 @@ connection.connect(function(err) {
           },
           {
             name: "deptName",
-            type: "rawlist",
+            type: "list",
             message: "What department does this product belong in?",
             choices: function() {
                 var choiceArray = [];
