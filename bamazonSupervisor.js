@@ -30,7 +30,7 @@ function startPrompt() {
         .prompt({
             name: "userChoice",
             type: "list",
-            message: "Would you like to [View Products for Sale]? [View Low Inventory]? [Add items to Inventory]? [Add a New Product]? Or [Exit]",
+            message: "What would you like to do?",
             choices: ["View Product Sales by Department", "Create New Department", "Exit"]
         })
         .then(function (answer) {
@@ -49,7 +49,7 @@ function startPrompt() {
 
 function viewDeptSales() {
     console.log("Selecting all departments...\n");
-    connection.query("select distinct d.department_id as 'Department ID',d.department_name as 'Department Name', sum(p.stock_quantity) as 'Stock Quantity', d.over_head_costs as 'Overhead Cost', sum(p.units_sold) as 'Total Units Sold',sum(p.product_sales) as 'Total Product Sales', (sum(p.product_sales) - d.over_head_costs) as 'Total Profit'from bamazon.departments d left join bamazon.products p on p.department_name = d.department_name group by p.department_name;"
+    connection.query("select d.department_id as 'Department ID',d.department_name as 'Department Name', sum(p.stock_quantity) as 'Stock Quantity', d.over_head_costs as 'Overhead Cost', sum(p.units_sold) as 'Total Units Sold',sum(p.product_sales) as 'Total Product Sales', (sum(p.product_sales) - d.over_head_costs) as 'Total Profit'from bamazon.departments d left join bamazon.products p on p.department_name = d.department_name group by d.department_name;"
         , function (err, res) {
             if (err) throw err;
             // Log all results of the SELECT statement
@@ -79,7 +79,6 @@ function createDept() {
             }
         ])
         .then(function (answer) {
-            console.log(answer)
             //check if department exists
             var checkOut = '';
             connection.query("SELECT department_name FROM departments", function (err, results) {

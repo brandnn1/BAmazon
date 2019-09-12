@@ -30,7 +30,7 @@ connection.connect(function(err) {
       .prompt({
         name: "userChoice",
         type: "list",
-        message: "Would you like to [View Products for Sale]? [View Low Inventory]? [Add items to Inventory]? [Add a New Product]? Or [Exit]",
+        message: "What would you like to do?",
         choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory","Add New Product","Exit"]
       })
       .then(function(answer) {

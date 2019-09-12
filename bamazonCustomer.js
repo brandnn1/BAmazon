@@ -27,7 +27,7 @@ connection.connect(function(err) {
   
   function showItems() {
     // query the database for all items being auctioned
-    connection.query("SELECT * FROM products", function(err, results) {
+    connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function(err, results) {
       if (err) throw err;
       // once you have the items, prompt the user for which they'd like to bid on
       inquirer
